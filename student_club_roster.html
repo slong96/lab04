@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Club Membership</title>
+
+  <style>
+      
+      .selected {
+        text-decoration: line-through ;
+        font-style: italic;
+        color: gray;
+      }
+
+      input {
+          width: 100%;
+          padding: 5px;
+          margin: 5px 5px 5px 0px;
+          box-sizing: border-box;
+
+      }
+
+  </style>
+
+</head>
+<body>
+
+    <h1>Student Club Roster</h1>
+
+    <h2>Add Students</h2>
+
+    <label for="student-name">Student Name</label><input id="student-name" name="student-name">
+    <br>
+    <label for="student-id">Student ID</label><input id="student-id" name="student-id">
+    <br>
+    <label for="student-gpa">Student GPA</label><input id="student-gpa" name="student-gpa" type="number">
+    <br>
+    <button id="add-student">Add Student</button>    
+
+    <h2>Student List</h2>
+
+    <p>There are 
+        <span id="student-count">0</span> 
+    student(s) in the club.</p>
+
+    <ul id="student-list">
+      <!-- use JavaScript to create li elements  -->
+    </ul>
+
+    <button id="remove-selected-students">Remove selected students</button>
+
+<script>
+
+// track number of items in list
+let itemsInList = 0
+let studentCount = document.querySelector('#student-count')
+let studentCountValue = studentCount
+
+
+// add button
+let addButton = document.querySelector('#add-student')
+
+// remove button
+let removeButton = document.querySelector('#remove-selected-students')
+
+
+// event listener for add button
+addButton.addEventListener('click', function() {
+
+  // variables
+  let studentName = document.querySelector('#student-name')
+  let studentID = document.querySelector('#student-id')
+  let studentGPA = document.querySelector('#student-gpa')
+  let studentList = document.querySelector('#student-list')
+  // let studentCount = document.querySelector('#student-count')
+
+  // read variable values
+  let studentNameValue = studentName.value
+  let studentIDValue = studentID.value
+  let studentGPAValue = studentGPA.value
+  let studentListValue = studentList
+  // let studentCountValue = studentCount
+
+  // validation for readStudentName
+  if (studentNameValue.length <= 0) {
+    alert('You must enter a name')
+    return
+  }
+  
+  // validation for readStudentID
+  if (studentIDValue.length <= 0) {
+    alert('You must enter an ID number')
+    return
+  }
+
+  // validation for readStudentGPA
+  if (studentGPAValue.length <= 0 || studentGPAValue >= 5) {
+    alert('GPA range must be 0-4')
+    return
+  }
+
+  // new list element
+  let newListItem = document.createElement('li')
+
+  // Formating what the text should look like in the list
+  newListItem.innerHTML = `${studentNameValue} | ID: ${studentIDValue} | GPA: ${studentGPAValue}`
+
+  // adding newListItem to readStudentList
+  studentListValue.append(newListItem)
+
+  // toggling class style selected
+  newListItem.onclick = function() {
+    newListItem.classList.toggle('selected')
+  }
+
+  // clear the inputs
+  studentName.value = ''
+  studentID.value = ''
+  studentGPA.value = ''
+
+  // add more items to list
+  itemsInList++
+
+  // update span number when item added to list
+  studentCountValue.innerHTML = itemsInList
+})
+
+// remove event listener
+removeButton.addEventListener('click', function() {
+  let removeElement = document.querySelectorAll('.selected')
+  removeElement.forEach(function(element) {
+    
+    // remove item from list
+    element.remove()
+
+    // decrease counter
+    itemsInList--
+    studentCountValue.innerHTML = itemsInList
+  })
+  
+})
+
+</script>
+
+</body>
+</html>
