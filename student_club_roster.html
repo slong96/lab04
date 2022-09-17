@@ -78,19 +78,19 @@ addButton.addEventListener('click', function() {
   let studentGPAValue = studentGPA.value
   let studentListValue = studentList
 
-  // validation for readStudentName
+  // validation for student name
   if (studentNameValue.length <= 0) {
     alert('You must enter a name')
     return
   }
   
-  // validation for readStudentID
+  // validation for student id
   if (studentIDValue.length <= 0) {
     alert('You must enter an ID number')
     return
   }
 
-  // validation for readStudentGPA
+  // validation for student gpa
   if (studentGPAValue.length <= 0 || studentGPAValue >= 5) {
     alert('GPA range must be 0-4')
     return
@@ -99,7 +99,7 @@ addButton.addEventListener('click', function() {
   // new list element
   let newListItem = document.createElement('li')
 
-  // Formating what the text should look like in the list
+  // formating what the text should look like in the list
   newListItem.innerHTML = `${studentNameValue} | ID: ${studentIDValue} | GPA: ${studentGPAValue}`
 
   // adding newListItem to readStudentList
